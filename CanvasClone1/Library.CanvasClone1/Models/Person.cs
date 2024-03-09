@@ -3,22 +3,25 @@
     public class Person
     {
         public string? Name { set; get; }
+        public int ID { set; get; }
         public StudentClass Classification;
-        public enum StudentClass
-        {
-            FRESHMAN = 1,
-            SOPHOMORE = 2,
-            JUNIOR = 3,
-            SENIOR = 4
-        }
+        
         public Dictionary<int, double> Grades { get; set; }
         public List<Course>? Classes { set; get; }
-        public Person(string name, StudentClass classification)
+        public Person()
         {
-            Name = name;
-            Classification = classification;
+            Name = string.Empty;
             Grades = new Dictionary<int, double>();
             Classes = new List<Course>();
         }
+
+        public override string ToString()
+        {
+            return $"[{ID}] {Name} - {Classification}";
+        }
+    }
+    public enum StudentClass
+    {
+        Freshman, Sophomore, Junior, Senior
     }
 }
