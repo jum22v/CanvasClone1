@@ -78,7 +78,7 @@ namespace CanvasClone1.Helpers
             Console.WriteLine("Enter a query:");
             var query = Console.ReadLine() ?? string.Empty;
 
-            studentService.Search(query).ToList().ForEach(Console.WriteLine);
+            studentService.Search(query).ToList().ForEach(Console.WriteLine); 
         }
 
     }
