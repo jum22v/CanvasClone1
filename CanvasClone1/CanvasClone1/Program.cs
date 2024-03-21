@@ -16,9 +16,10 @@ namespace MyApp
             {
                 Console.WriteLine("1. Add a student");
                 Console.WriteLine("2. List all enrolled students");
-                Console.WriteLine("3. Search for a student");
-                Console.WriteLine("4. Create a new course");
-                Console.WriteLine("5. Exit");
+                Console.WriteLine("3. Update student enrollment");
+                Console.WriteLine("4. Search for a student");
+                Console.WriteLine("5. Create a new course");
+                Console.WriteLine("6. Exit");
                 var input = Console.ReadLine();
                 if (int.TryParse(input, out int result))
                 {
@@ -27,17 +28,22 @@ namespace MyApp
 
                     if (result == 1)
                     {
-                        studentHelper.CreateStudent();
+                        studentHelper.AddOrUpdateStudent();
                     } else if (result == 2)
                     {
                         studentHelper.ListStudents();
                     } else if (result == 3)
                     {
-                        studentHelper.SearchStudents();
+                        studentHelper.UpdateStudent();
                     } else if (result == 4)
                     {
+                        studentHelper.SearchStudents();
+                    }
+                    else if (result == 5)
+                    {
                         courseHelper.CreateCourse();
-                    } else if (result == 5)
+                    }
+                    else if (result == 6)
                     {
                         cont = false;
                     }

@@ -11,7 +11,7 @@ namespace CanvasClone1.Helpers
     internal class StudentHelper
     {
         private StudentService studentService = new StudentService();
-        public void CreateStudent()
+        public void AddOrUpdateStudent(Person? selectedStudent = null)
         {
             Console.WriteLine("What is the name of the student?");
             var name = Console.ReadLine();
@@ -34,15 +34,38 @@ namespace CanvasClone1.Helpers
                 classEnum = StudentClass.Senior;
             }
 
-            var student = new Person
+            bool isCreate = false;
+            if (selectedStudent == null)
+            {   
+                isCreate = true;
+                selectedStudent = new Person();
+            }
+
+            selectedStudent.Name = name ?? string.Empty;
+            selectedStudent.ID = int.Parse(id ?? "0");
+            selectedStudent.Classification = classEnum;
+
+            if (isCreate)
             {
-                Name = name ?? string.Empty,
-                ID = int.Parse(id ?? "0"),
-                Classification = classEnum
-            };
+                studentService.Add(selectedStudent);
+            }
+        }
 
-            studentService.Add(student);
+        public void UpdateStudent()
+        {
+            Console.WriteLine("Select a student to update: ");
+            ListStudents();
 
+            var selection = Console.ReadLine();
+
+            if (int.TryParse(selection, out int selectionInt))
+            {
+                var selectedStudent = studentService.Students.FirstOrDefault(s => s.ID == selectionInt);
+                if (selectedStudent != null)
+                {
+                    AddOrUpdateStudent(selectedStudent);
+                }
+            }
         }
 
         public void ListStudents()
@@ -57,5 +80,6 @@ namespace CanvasClone1.Helpers
 
             studentService.Search(query).ToList().ForEach(Console.WriteLine);
         }
+
     }
 }
