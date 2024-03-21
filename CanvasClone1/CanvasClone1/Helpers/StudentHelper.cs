@@ -11,10 +11,12 @@ namespace CanvasClone1.Helpers
     internal class StudentHelper
     {
         private StudentService studentService;
+        private CourseService courseService;
 
         public StudentHelper()
         {
             studentService = StudentService.Current;
+            courseService = CourseService.Current;
         }
 
         public void AddOrUpdateStudent(Person? selectedStudent = null)
@@ -77,6 +79,13 @@ namespace CanvasClone1.Helpers
         public void ListStudents()
         {
             studentService.Students.ForEach(Console.WriteLine);
+
+            Console.WriteLine("Select a student: ");
+            var selection = Console.ReadLine();
+            var selectionInt = int.Parse(selection ?? "0");
+
+            Console.WriteLine("Student course list: ");
+            courseService.Courses.Where(c => c.Roster.Any(s => s.ID == selectionInt)).ToList().ForEach(Console.WriteLine);
         }
 
         public void SearchStudents()
@@ -84,7 +93,12 @@ namespace CanvasClone1.Helpers
             Console.WriteLine("Enter a query:");
             var query = Console.ReadLine() ?? string.Empty;
 
-            studentService.Search(query).ToList().ForEach(Console.WriteLine); 
+            studentService.Search(query).ToList().ForEach(Console.WriteLine);
+            var selection = Console.ReadLine();
+            var selectionInt = int.Parse(selection ?? "0");
+
+            Console.WriteLine("Student course list: ");
+            courseService.Courses.Where(c => c.Roster.Any(s => s.ID == selectionInt)).ToList().ForEach(Console.WriteLine);
         }
 
     }

@@ -10,12 +10,13 @@ namespace CanvasClone1.Helpers
 {
     public class CourseHelper
     {
-        private CourseService courseService = new CourseService();
+        private CourseService courseService;
         private StudentService studentService;
 
         public CourseHelper() 
         {
             studentService = StudentService.Current;
+            courseService = CourseService.Current;
         }
 
         public void CreateCourse(Course? selectedCourse = null)
