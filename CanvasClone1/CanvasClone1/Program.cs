@@ -20,7 +20,8 @@ namespace MyApp
                 Console.WriteLine("4. Search for a student");
                 Console.WriteLine("5. Create a new course");
                 Console.WriteLine("6. List all courses");
-                Console.WriteLine("7. Exit");
+                Console.WriteLine("7. Update course information");
+                Console.WriteLine("8. Exit");
                 var input = Console.ReadLine();
                 if (int.TryParse(input, out int result))
                 {
@@ -46,6 +47,9 @@ namespace MyApp
                     {
                         courseHelper.ListCourses();
                     } else if (result == 7)
+                    {
+                        courseHelper.UpdateCourse();
+                    } else if (result == 8)
                     {
                         cont = false;
                     }
