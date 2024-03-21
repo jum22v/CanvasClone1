@@ -29,8 +29,11 @@ namespace CanvasClone1.Helpers
             };
 
             courseService.Add(course);
+        }
 
-            courseService.courseList.ForEach(Console.WriteLine);
+        public void ListCourses()
+        {
+            courseService.Courses.ForEach(Console.WriteLine);
         }
     }
 }
