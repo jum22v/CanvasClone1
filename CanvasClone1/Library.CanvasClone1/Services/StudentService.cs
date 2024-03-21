@@ -9,7 +9,7 @@ namespace Library.CanvasClone1.Services
 {
     public class StudentService
     {
-        public List<Person> studentList = new List<Person>();
+        private List<Person> studentList = new List<Person>();
 
         public void Add(Person student)
         {
