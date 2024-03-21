@@ -10,7 +10,13 @@ namespace CanvasClone1.Helpers
 {
     internal class StudentHelper
     {
-        private StudentService studentService = new StudentService();
+        private StudentService studentService;
+
+        public StudentHelper()
+        {
+            studentService = StudentService.Current;
+        }
+
         public void AddOrUpdateStudent(Person? selectedStudent = null)
         {
             Console.WriteLine("What is the name of the student?");

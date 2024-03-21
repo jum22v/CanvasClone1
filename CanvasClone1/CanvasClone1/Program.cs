@@ -1,13 +1,12 @@
 ﻿using CanvasClone1.Helpers;
-using Library.CanvasClone1.Models;
-using System;
 
 namespace MyApp
 {
     internal class Program
     {
         static void Main(string[] args)
-        {
+        {   
+            //var studentSrvc = new StudentService();
             var studentHelper = new StudentHelper();
             var courseHelper = new CourseHelper();
             bool cont = true;
