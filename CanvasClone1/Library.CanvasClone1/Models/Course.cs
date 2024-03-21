@@ -23,10 +23,5 @@ namespace Library.CanvasClone1.Models
             Assignments = new List<Assignment>();
             Modules = new List<Module>();
         }
-
-        public override string ToString()
-        {
-            return $"{Code} - {Name}";
-        }
     }
 }
