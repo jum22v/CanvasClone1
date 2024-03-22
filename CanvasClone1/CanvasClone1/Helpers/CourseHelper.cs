@@ -112,7 +112,7 @@ namespace CanvasClone1.Helpers
         public void UpdateCourse()
         {
             Console.WriteLine("Select a course to update (code): ");
-            ListCourses();
+            SearchCourses();
 
             var selection = Console.ReadLine();
 
@@ -123,17 +123,28 @@ namespace CanvasClone1.Helpers
             }
         }
 
-        public void ListCourses()
+        public void SearchCourses(string? query = null)
         {
-            courseService.Courses.ForEach(Console.WriteLine);
-        }
+            if (string.IsNullOrEmpty(query))
+            {
+                courseService.Courses.ForEach(Console.WriteLine);
+            }
+            else
+            {
+                courseService.Search(query).ToList().ForEach(Console.WriteLine);
+            }
 
-        public void SearchCourses()
-        {
-            Console.WriteLine("Enter a query:");
-            var query = Console.ReadLine() ?? string.Empty;
+            Console.WriteLine("Select a course (code): ");
+            var code = Console.ReadLine() ?? string.Empty;
 
-            courseService.Search(query).ToList().ForEach(Console.WriteLine);
+            var selectedCourse = courseService
+                .Courses
+                .FirstOrDefault(c => c.Code.Equals(code, StringComparison.InvariantCultureIgnoreCase));
+            if (selectedCourse != null)
+            {
+                Console.WriteLine(selectedCourse.DetailDisplay);
+            }
+
         }
 
     }

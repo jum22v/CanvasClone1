@@ -12,6 +12,11 @@ namespace Library.CanvasClone1.Models
         public string? Description { set; get; }
         public decimal? Totalavailablepoints { set; get; }
         public DateTime Duedate { set; get; }
-  
+
+        public override string ToString()
+        {
+            return $"({Duedate}) {Name}";
+        }
+
     }
 }
