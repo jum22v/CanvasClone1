@@ -55,6 +55,40 @@ namespace CanvasClone1.Helpers
                 }
             }
 
+            Console.WriteLine("Would you like to add assignments? (Y/N)");
+            var addAssignment = Console.ReadLine() ?? "N";
+            var assignments = new List<Assignment>();
+            if (addAssignment.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+            {
+                adding = true;
+                while (adding)
+                {
+                    Console.WriteLine("Name: ");
+                    var assignmentName = Console.ReadLine() ?? string.Empty;
+                    Console.WriteLine("Description: ");
+                    var assignmentDescription = Console.ReadLine() ?? string.Empty;
+                    Console.WriteLine("TotalPoints: ");
+                    var totalPoints = decimal.Parse(Console.ReadLine() ?? "100");
+                    Console.WriteLine("DueDate: ");
+                    var dueDate = DateTime.Parse(Console.ReadLine() ?? "01/01/0001");
+
+                    assignments.Add(new Assignment
+                    {
+                        Name = assignmentName,
+                        Description = assignmentDescription,
+                        Totalavailablepoints = totalPoints,
+                        Duedate = dueDate,
+                    });
+
+                    Console.WriteLine("Add more assignments? (Y/N)");
+                    addAssignment = Console.ReadLine() ?? "N";
+                    if (addAssignment.Equals("N", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        adding = false;
+                    }
+                }
+            }
+
             bool isNewCourse = false;
             if(selectedCourse == null)
             {   
@@ -67,7 +101,8 @@ namespace CanvasClone1.Helpers
             selectedCourse.Description = description;
             selectedCourse.Roster = new List<Person>();
             selectedCourse.Roster.AddRange(roster);
-
+            selectedCourse.Assignments = new List<Assignment>();
+            selectedCourse.Assignments.AddRange(assignments);
             if(isNewCourse)
             {
                 courseService.Add(selectedCourse);
@@ -100,5 +135,6 @@ namespace CanvasClone1.Helpers
 
             courseService.Search(query).ToList().ForEach(Console.WriteLine);
         }
+
     }
 }

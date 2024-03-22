@@ -10,14 +10,8 @@ namespace Library.CanvasClone1.Models
     {
         public string? Name { set; get; }
         public string? Description { set; get; }
-        public double? Totalavailablepoints { set; get; }
-        public string? Duedate { set; get; }
-        public Assignment(string? name, string? description, double? totalavailablepoints, string? duedate)
-        {
-            Name = name;
-            Description = description;
-            Totalavailablepoints = totalavailablepoints;
-            Duedate = duedate;
-        }
+        public decimal? Totalavailablepoints { set; get; }
+        public DateTime Duedate { set; get; }
+  
     }
 }
