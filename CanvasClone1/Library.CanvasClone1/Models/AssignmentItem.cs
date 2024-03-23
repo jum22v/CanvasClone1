@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Library.CanvasClone1.Models
 {
-    public class ContentItem
+    public class AssignmentItem : ContentItem
     {
-        public string? Name { set; get; }
-        public string? Description { get; set; }
-        public int ID { set; get; }
+        public Assignment? Assignment { get; set; }
     }
 }
