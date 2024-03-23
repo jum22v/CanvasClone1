@@ -19,7 +19,7 @@ namespace CanvasClone1.Helpers
             courseService = CourseService.Current;
         }
 
-        public void AddOrUpdateStudent(Person? selectedStudent = null)
+        public void AddOrUpdateStudent(Student? selectedStudent = null)
         {
             Console.WriteLine("What is the name of the student?");
             var name = Console.ReadLine();
@@ -46,7 +46,7 @@ namespace CanvasClone1.Helpers
             if (selectedStudent == null)
             {   
                 isCreate = true;
-                selectedStudent = new Person();
+                selectedStudent = new Student();
             }
 
             selectedStudent.Name = name ?? string.Empty;
