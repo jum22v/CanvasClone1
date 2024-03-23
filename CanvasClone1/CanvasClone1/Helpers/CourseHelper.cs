@@ -151,8 +151,7 @@ namespace CanvasClone1.Helpers
         public void UpdateCourse()
         {
             Console.WriteLine("Select a course to update (code): ");
-            SearchCourses();
-
+            courseService.Courses.ForEach(Console.WriteLine);
             var selection = Console.ReadLine();
 
             var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
