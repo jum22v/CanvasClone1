@@ -21,88 +21,63 @@ namespace CanvasClone1.Helpers
 
         public void CreateCourse(Course? selectedCourse = null)
         {
-            Console.WriteLine("What is the name of the course?");
-            var name = Console.ReadLine() ?? string.Empty;
-            Console.WriteLine("What is the code of the course?");
-            var code = Console.ReadLine() ?? string.Empty;
-            Console.WriteLine("What is the description of the course?");
-            var description = Console.ReadLine() ?? string.Empty;
-
-            Console.WriteLine("Which students should be enrolled in the course? (Q to quit)");
-            var roster = new List<Person>();
-            bool adding = true;
-            while (adding)
-            {
-                studentService.Students.Where(s => !roster.Any(s2 => s2.ID == s.ID)).ToList().ForEach(Console.WriteLine);
-                var selection = "Q";
-                if (studentService.Students.Any(s => !roster.Any(s2 => s2.ID == s.ID)))
-                {
-                    selection = Console.ReadLine() ?? string.Empty;
-                }
-
-                if (selection.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    adding = false;
-                } else
-                {   
-                    var selectedID = int.Parse(selection);
-                    var selectedStudent = studentService.Students.FirstOrDefault(s => s.ID == selectedID);
-
-                    if (selectedStudent != null)
-                    {
-                        roster.Add(selectedStudent);
-                    }
-                }
-            }
-
-            Console.WriteLine("Would you like to add assignments? (Y/N)");
-            var addAssignment = Console.ReadLine() ?? "N";
-            var assignments = new List<Assignment>();
-            if (addAssignment.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
-            {
-                adding = true;
-                while (adding)
-                {
-                    Console.WriteLine("Name: ");
-                    var assignmentName = Console.ReadLine() ?? string.Empty;
-                    Console.WriteLine("Description: ");
-                    var assignmentDescription = Console.ReadLine() ?? string.Empty;
-                    Console.WriteLine("TotalPoints: ");
-                    var totalPoints = decimal.Parse(Console.ReadLine() ?? "100");
-                    Console.WriteLine("DueDate: ");
-                    var dueDate = DateTime.Parse(Console.ReadLine() ?? "01/01/0001");
-
-                    assignments.Add(new Assignment
-                    {
-                        Name = assignmentName,
-                        Description = assignmentDescription,
-                        Totalavailablepoints = totalPoints,
-                        Duedate = dueDate,
-                    });
-
-                    Console.WriteLine("Add more assignments? (Y/N)");
-                    addAssignment = Console.ReadLine() ?? "N";
-                    if (addAssignment.Equals("N", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        adding = false;
-                    }
-                }
-            }
-
             bool isNewCourse = false;
-            if(selectedCourse == null)
-            {   
+            if (selectedCourse == null)
+            {
                 isNewCourse = true;
                 selectedCourse = new Course();
             }
 
-            selectedCourse.Name = name;
-            selectedCourse.Code = code;
-            selectedCourse.Description = description;
-            selectedCourse.Roster = new List<Person>();
-            selectedCourse.Roster.AddRange(roster);
-            selectedCourse.Assignments = new List<Assignment>();
-            selectedCourse.Assignments.AddRange(assignments);
+            var choice = "Y";
+            if (!isNewCourse)
+            {
+                Console.WriteLine("Update course code? (Y/N)");
+                choice = Console.ReadLine() ?? "N";
+            }
+            
+            if(choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+            {
+                Console.WriteLine("What is the code of the course?");
+                selectedCourse.Code = Console.ReadLine() ?? string.Empty;
+            }
+
+            if(!isNewCourse)
+            {
+                Console.WriteLine("Update course name? (Y/N)");
+                choice = Console.ReadLine() ?? "N";
+            }
+            else
+            {
+                choice = "Y";
+            }
+            if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+            {
+                Console.WriteLine("What is the name of the course?");
+                selectedCourse.Name = Console.ReadLine() ?? string.Empty;
+            }
+
+            if (!isNewCourse)
+            {
+                Console.WriteLine("Update course description? (Y/N)");
+                choice = Console.ReadLine() ?? "N";
+            }
+            else
+            {
+                choice = "Y";
+            }
+            if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+            {
+                Console.WriteLine("What is the description of the course?");
+                selectedCourse.Description = Console.ReadLine() ?? string.Empty;
+            }
+
+            if (isNewCourse)
+            {
+                
+                SetUpRoster(selectedCourse);
+                SetUpAssignments(selectedCourse);
+            }
+
             if(isNewCourse)
             {
                 courseService.Add(selectedCourse);
@@ -112,8 +87,7 @@ namespace CanvasClone1.Helpers
         public void UpdateCourse()
         {
             Console.WriteLine("Select a course to update (code): ");
-            SearchCourses();
-
+            courseService.Courses.ForEach(Console.WriteLine);
             var selection = Console.ReadLine();
 
             var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
@@ -147,5 +121,75 @@ namespace CanvasClone1.Helpers
 
         }
 
+
+        private void SetUpRoster (Course c)
+        {
+
+            Console.WriteLine("Which students should be enrolled in the course? (Q to quit)");
+            bool adding = true;
+            while (adding)
+            {
+                studentService.Students.Where(s => !c.Roster.Any(s2 => s2.ID == s.ID)).ToList().ForEach(Console.WriteLine);
+                var selection = "Q";
+                if (studentService.Students.Any(s => !c.Roster.Any(s2 => s2.ID == s.ID)))
+                {
+                    selection = Console.ReadLine() ?? string.Empty;
+                }
+
+                if (selection.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    adding = false;
+                }
+                else
+                {
+                    var selectedID = int.Parse(selection);
+                    var selectedStudent = studentService.Students.FirstOrDefault(s => s.ID == selectedID);
+
+                    if (selectedStudent != null)
+                    {
+                        c.Roster.Add(selectedStudent);
+                    }
+                }
+            }
+        }
+
+        private void SetUpAssignments(Course c)
+        {
+            Console.WriteLine("Would you like to add assignments? (Y/N)");
+            bool adding = true;
+            var addAssignment = Console.ReadLine() ?? "N";
+
+            if (addAssignment.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+            {
+                adding = true;
+                while (adding)
+                {
+                    Console.WriteLine("Name: ");
+                    var assignmentName = Console.ReadLine() ?? string.Empty;
+                    Console.WriteLine("Description: ");
+                    var assignmentDescription = Console.ReadLine() ?? string.Empty;
+                    Console.WriteLine("TotalPoints: ");
+                    var totalPoints = decimal.Parse(Console.ReadLine() ?? "100");
+                    Console.WriteLine("DueDate: ");
+                    var dueDate = DateTime.Parse(Console.ReadLine() ?? "01/01/0001");
+
+                    c.Assignments.Add(new Assignment
+                    {
+                        Name = assignmentName,
+                        Description = assignmentDescription,
+                        Totalavailablepoints = totalPoints,
+                        Duedate = dueDate,
+                    });
+
+                    Console.WriteLine("Add more assignments? (Y/N)");
+                    addAssignment = Console.ReadLine() ?? "N";
+                    if (addAssignment.Equals("N", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        adding = false;
+                    }
+                }
+            }
+
+        }
     }
 }
