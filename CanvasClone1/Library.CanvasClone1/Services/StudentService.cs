@@ -9,13 +9,13 @@ namespace Library.CanvasClone1.Services
 {
     public class StudentService
     {
-        private List<Person> studentList;
+        private List<Student> studentList;
 
         private static StudentService? _instance;
 
         private StudentService()
         {
-            studentList = new List<Person>();
+            studentList = new List<Student>();
         }
 
         public static StudentService Current
@@ -30,12 +30,12 @@ namespace Library.CanvasClone1.Services
             }
         }
 
-        public void Add(Person student)
+        public void Add(Student student)
         {
             studentList.Add(student);
         }
 
-        public List<Person> Students
+        public List<Student> Students
         {
             get
             {
@@ -43,7 +43,7 @@ namespace Library.CanvasClone1.Services
             }
         }
 
-        public IEnumerable<Person> Search(string query)
+        public IEnumerable<Student> Search(string query)
         {
             return studentList.Where(s => s.Name.ToUpper().Contains(query.ToUpper()));
         }

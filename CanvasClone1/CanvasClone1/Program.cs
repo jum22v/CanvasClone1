@@ -6,7 +6,6 @@ namespace MyApp
     {
         static void Main(string[] args)
         {   
-            //var studentSrvc = new StudentService();
             var studentHelper = new StudentHelper();
             var courseHelper = new CourseHelper();
             bool cont = true;
