@@ -178,6 +178,41 @@ namespace CanvasClone1.Helpers
             }
         }
 
+        public void AddAssignment()
+        {
+            Console.WriteLine("Enter the code of the course to add the assignment to: ");
+            courseService.Courses.ForEach(Console.WriteLine);
+            var selection = Console.ReadLine();
+
+            var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+            if (selectedCourse != null)
+            {
+                selectedCourse.Assignments.Add(CreateAssignment());
+            }
+        }
+
+        public void UpdateAssignment()
+        {
+            Console.WriteLine("Enter the code of the course: ");
+            courseService.Courses.ForEach(Console.WriteLine);
+            var selection = Console.ReadLine();
+
+            var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+            if (selectedCourse != null)
+            {
+                Console.WriteLine("Choose an assignment to update: ");
+                selectedCourse.Assignments.ForEach(Console.WriteLine);
+                var selectionStr = Console.ReadLine() ?? string.Empty;
+                var selectionInt = int.Parse(selectionStr);
+                var selectedAssignment = selectedCourse.Assignments.FirstOrDefault(a => a.ID == selectionInt);
+                if (selectedAssignment != null)
+                {
+                    var index = selectedCourse.Assignments.IndexOf(selectedAssignment);
+                    selectedCourse.Assignments.RemoveAt(index);
+                    selectedCourse.Assignments.Insert(index, CreateAssignment());
+                }
+            }
+        }
         private void SetUpRoster (Course c)
         {
 
@@ -212,30 +247,14 @@ namespace CanvasClone1.Helpers
         private void SetUpAssignments(Course c)
         {
             Console.WriteLine("Would you like to add assignments? (Y/N)");
-            bool adding = true;
             var addAssignment = Console.ReadLine() ?? "N";
-
+            bool adding;
             if (addAssignment.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
             {
                 adding = true;
                 while (adding)
                 {
-                    Console.WriteLine("Name: ");
-                    var assignmentName = Console.ReadLine() ?? string.Empty;
-                    Console.WriteLine("Description: ");
-                    var assignmentDescription = Console.ReadLine() ?? string.Empty;
-                    Console.WriteLine("TotalPoints: ");
-                    var totalPoints = decimal.Parse(Console.ReadLine() ?? "100");
-                    Console.WriteLine("DueDate: ");
-                    var dueDate = DateTime.Parse(Console.ReadLine() ?? "01/01/0001");
-
-                    c.Assignments.Add(new Assignment
-                    {
-                        Name = assignmentName,
-                        Description = assignmentDescription,
-                        Totalavailablepoints = totalPoints,
-                        Duedate = dueDate,
-                    });
+                    c.Assignments.Add(CreateAssignment());
 
                     Console.WriteLine("Add more assignments? (Y/N)");
                     addAssignment = Console.ReadLine() ?? "N";
@@ -246,6 +265,26 @@ namespace CanvasClone1.Helpers
                 }
             }
 
+        }
+
+        private Assignment CreateAssignment()
+        {
+            Console.WriteLine("Name: ");
+            var assignmentName = Console.ReadLine() ?? string.Empty;
+            Console.WriteLine("Description: ");
+            var assignmentDescription = Console.ReadLine() ?? string.Empty;
+            Console.WriteLine("TotalPoints: ");
+            var totalPoints = decimal.Parse(Console.ReadLine() ?? "100");
+            Console.WriteLine("DueDate: ");
+            var dueDate = DateTime.Parse(Console.ReadLine() ?? "01/01/0001");
+
+            return new Assignment
+            {
+                Name = assignmentName,
+                Description = assignmentDescription,
+                Totalavailablepoints = totalPoints,
+                Duedate = dueDate
+            };
         }
     }
 }

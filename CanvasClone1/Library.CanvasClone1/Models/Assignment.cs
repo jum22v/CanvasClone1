@@ -8,6 +8,12 @@ namespace Library.CanvasClone1.Models
 {
     public class Assignment
     {
+        private static int lastId = 0;
+        public int ID { get
+            {
+                return ++lastId;
+            }
+        }
         public string? Name { set; get; }
         public string? Description { set; get; }
         public decimal? Totalavailablepoints { set; get; }
@@ -15,7 +21,7 @@ namespace Library.CanvasClone1.Models
 
         public override string ToString()
         {
-            return $"({Duedate}) {Name}";
+            return $"([{ID}] - {Duedate}) {Name}";
         }
 
     }
