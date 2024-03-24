@@ -66,11 +66,12 @@ namespace MyApp
             Console.WriteLine("1. Create a new course");
             Console.WriteLine("2. List all courses");
             Console.WriteLine("3. Add a student to a course");
-            Console.WriteLine("4. Add an assignment");
-            Console.WriteLine("5. Update an assignment");
-            Console.WriteLine("6. Remove a student from a course");
-            Console.WriteLine("7. Update course information");
-            Console.WriteLine("8. Search for a course");
+            Console.WriteLine("4. Remove a student from a course");
+            Console.WriteLine("5. Add an assignment");
+            Console.WriteLine("6. Update an assignment");
+            Console.WriteLine("7. Remove an assignment");
+            Console.WriteLine("8. Update course information");
+            Console.WriteLine("9. Search for a course");
 
             var input = Console.ReadLine();
             if (int.TryParse(input, out int result))
@@ -89,21 +90,25 @@ namespace MyApp
                 }
                 else if (result == 4)
                 {
-                    courseHelper.AddAssignment();
+                    courseHelper.RemoveStudent();
                 }
                 else if (result == 5)
                 {
-                    courseHelper.UpdateAssignment();
+                    courseHelper.AddAssignment();
                 }
                 else if (result == 6)
                 {
-                    courseHelper.RemoveStudent();
+                    courseHelper.UpdateAssignment();
                 }
                 else if (result == 7)
                 {
-                    courseHelper.UpdateCourse();
+                    courseHelper.RemoveAssignment();
                 }
                 else if (result == 8)
+                {
+                    courseHelper.UpdateCourse();
+                }
+                else if (result == 9)
                 {
                     Console.WriteLine("Enter a query:");
                     var query = Console.ReadLine() ?? string.Empty;

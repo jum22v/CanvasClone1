@@ -9,9 +9,15 @@ namespace Library.CanvasClone1.Models
     public class Assignment
     {
         private static int lastId = 0;
-        public int ID { get
+        private int id = 0;
+        public int ID { 
+            get
             {
-                return ++lastId;
+                if (id == 0)
+                {
+                    id = ++lastId;
+                }
+                return id;
             }
         }
         public string? Name { set; get; }
