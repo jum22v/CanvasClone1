@@ -10,7 +10,7 @@ namespace Library.CanvasClone1.Models
     {
         public string? Name { set; get; }
         public string? Description { set; get; }
-        public List<ContentItem>? Content { set; get; }
+        public List<ContentItem> Content { set; get; }
         public Module()
         {
             Content = new List<ContentItem>();
