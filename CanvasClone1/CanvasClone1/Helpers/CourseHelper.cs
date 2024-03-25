@@ -192,6 +192,19 @@ namespace CanvasClone1.Helpers
             }
         }
 
+        public void AddModule()
+        {
+            Console.WriteLine("Enter the code of the course to add the module to: ");
+            courseService.Courses.ForEach(Console.WriteLine);
+            var selection = Console.ReadLine();
+
+            var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+            if (selectedCourse != null)
+            {
+                selectedCourse.Modules.Add(CreateModule(selectedCourse));
+            }
+        }
+
         public void UpdateAssignment()
         {
             Console.WriteLine("Enter the code of the course: ");
