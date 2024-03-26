@@ -9,7 +9,6 @@ namespace Library.CanvasClone1.Models
     public class ContentItem
     {
         private static int lastId = 0;
-        private static int id = 0;
         public int ID
         {
             get; private set;

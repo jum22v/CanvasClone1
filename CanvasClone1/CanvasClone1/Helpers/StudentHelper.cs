@@ -48,8 +48,6 @@ namespace CanvasClone1.Helpers
 
             Console.WriteLine("What is the name of the person?");
             var name = Console.ReadLine();
-            Console.WriteLine("What is the id of the person?");
-            var id = Console.ReadLine();
             if (selectedStudent is Student)
             {
                 Console.WriteLine("What is the classification of the student? [(F)reshman, S(O)phomore, (J)unior, (S)enior]");
@@ -73,7 +71,6 @@ namespace CanvasClone1.Helpers
                 {
                     studentRecord.Classification = classEnum;
                     selectedStudent.Name = name ?? string.Empty;
-                    selectedStudent.ID = int.Parse(id ?? "0");
 
                     if (isCreate)
                     {
@@ -85,7 +82,6 @@ namespace CanvasClone1.Helpers
                 if (selectedStudent != null)
                 {
                     selectedStudent.Name = name ?? string.Empty;
-                    selectedStudent.ID = int.Parse(id ?? "0");
                     if (isCreate)
                     {
                         studentService.Add(selectedStudent);
