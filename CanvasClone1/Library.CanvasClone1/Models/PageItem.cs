@@ -9,5 +9,6 @@ namespace Library.CanvasClone1.Models
     public class PageItem : ContentItem
     {
         public string? HtmlBody { get; set; }
+
     }
 }

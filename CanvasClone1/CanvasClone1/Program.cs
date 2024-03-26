@@ -70,7 +70,7 @@ namespace MyApp
             Console.WriteLine("5. Add an assignment");
             Console.WriteLine("6. Update an assignment");
             Console.WriteLine("7. Remove an assignment");
-            Console.WriteLine("8 .Add a module to a course");
+            Console.WriteLine("8. Add a module to a course");
             Console.WriteLine("9. Update course information");
             Console.WriteLine("10. Search for a course");
 

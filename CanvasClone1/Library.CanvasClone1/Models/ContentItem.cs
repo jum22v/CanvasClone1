@@ -11,5 +11,10 @@ namespace Library.CanvasClone1.Models
         public string? Name { set; get; }
         public string? Description { get; set; }
         public int ID { set; get; }
+
+        public override string ToString()
+        {
+            return $"{Name}: {Description}";
+        }
     }
 }
