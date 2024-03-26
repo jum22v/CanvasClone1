@@ -8,6 +8,19 @@ namespace Library.CanvasClone1.Models
 {
     public class Module
     {
+        private static int lastId = 0;
+        private static int id = 0;
+        public int ID
+        {
+            get
+            {
+                if (id == 0)
+                {
+                    id = ++lastId;
+                }
+                return id;
+            }
+        }
         public string? Name { set; get; }
         public string? Description { set; get; }
         public List<ContentItem> Content { set; get; }

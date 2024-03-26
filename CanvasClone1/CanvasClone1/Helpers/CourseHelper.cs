@@ -248,6 +248,27 @@ namespace CanvasClone1.Helpers
                 }
             }
         }
+
+        public void RemoveModule()
+        {
+            Console.WriteLine("Enter the code of the course: ");
+            courseService.Courses.ForEach(Console.WriteLine);
+            var selection = Console.ReadLine();
+
+            var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+            if (selectedCourse != null)
+            {
+                Console.WriteLine("Choose a module to delete: ");
+                selectedCourse.Modules.ForEach(Console.WriteLine);
+                var selectionStr = Console.ReadLine() ?? string.Empty;
+                var selectionInt = int.Parse(selectionStr);
+                var selectedModule = selectedCourse.Modules.FirstOrDefault(m => m.ID == selectionInt);
+                if (selectedModule != null)
+                {
+                    selectedCourse.Modules.Remove(selectedModule);
+                }
+            }
+        }
         private void SetUpRoster (Course c)
         {
 
