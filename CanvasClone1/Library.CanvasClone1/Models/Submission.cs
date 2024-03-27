@@ -20,6 +20,8 @@ namespace Library.CanvasClone1.Models
 
         public string Content { get; set; }
 
+        public decimal Grade { get; set; }
+
         public Submission()
         {
             ID = ++lastId;
@@ -28,7 +30,7 @@ namespace Library.CanvasClone1.Models
 
         public override string ToString()
         {
-            return $"[{ID}] {Student.Name}: {Assignment}";
+            return $"[{ID}] ({Grade}) {Student.Name}: {Assignment.Name}";
         }
     }
 }
