@@ -674,7 +674,7 @@ namespace CanvasClone1.Helpers
 
         public void ListSubmissions()
         {
-            Console.WriteLine("Enter the code of the course to add the assignment to: ");
+            Console.WriteLine("Enter the code of the course: ");
             courseService.Courses.ForEach(Console.WriteLine);
             var selection = Console.ReadLine();
 
@@ -682,6 +682,26 @@ namespace CanvasClone1.Helpers
             if (selectedCourse != null)
             {
                 selectedCourse.Submissions.ForEach(Console.WriteLine);
+            }
+        }
+
+        public void RemoveSubmission()
+        {
+            Console.WriteLine("Enter the code of the course: ");
+            courseService.Courses.ForEach(Console.WriteLine);
+            var selection = Console.ReadLine();
+
+            var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+            if (selectedCourse != null)
+            {
+                selectedCourse.Submissions.ForEach(Console.WriteLine);
+                var selectedId = int.Parse(Console.ReadLine() ?? "0");
+
+                var selectedSubmission = selectedCourse.Submissions.FirstOrDefault(s => s.ID == selectedId);
+                if (selectedSubmission != null)
+                {
+                    selectedCourse.Submissions.Remove(selectedSubmission);
+                }
             }
         }
     }
