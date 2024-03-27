@@ -188,7 +188,7 @@ namespace CanvasClone1.Helpers
             var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
             if (selectedCourse != null)
             {
-                selectedCourse.Assignments.Add(CreateAssignment());
+                CreateAssignmentWithGroup(selectedCourse);
             }
         }
 
@@ -316,15 +316,19 @@ namespace CanvasClone1.Helpers
             if (selectedCourse != null)
             {
                 Console.WriteLine("Choose an assignment to update: ");
-                selectedCourse.Assignments.ForEach(Console.WriteLine);
+                selectedCourse.Assignments.ToList().ForEach(Console.WriteLine);
                 var selectionStr = Console.ReadLine() ?? string.Empty;
                 var selectionInt = int.Parse(selectionStr);
-                var selectedAssignment = selectedCourse.Assignments.FirstOrDefault(a => a.ID == selectionInt);
-                if (selectedAssignment != null)
+                var selectedGroup = selectedCourse.AssignmentGroups.FirstOrDefault(ag => ag.Assignments.Any(a => a.ID == selectionInt));
+                if (selectedGroup != null)
                 {
-                    var index = selectedCourse.Assignments.IndexOf(selectedAssignment);
-                    selectedCourse.Assignments.RemoveAt(index);
-                    selectedCourse.Assignments.Insert(index, CreateAssignment());
+                    var selectedAssignment = selectedGroup.Assignments.FirstOrDefault(a => a.ID == selectionInt);
+                    if (selectedAssignment != null)
+                    {
+                        var index = selectedGroup.Assignments.IndexOf(selectedAssignment);
+                        selectedGroup.Assignments.RemoveAt(index);
+                        selectedGroup.Assignments.Insert(index, CreateAssignment());
+                    }
                 }
             }
         }
@@ -370,6 +374,8 @@ namespace CanvasClone1.Helpers
                 }
             }
         }
+
+
         
         private void SetUpRoster (Course c)
         {
@@ -412,7 +418,7 @@ namespace CanvasClone1.Helpers
                 adding = true;
                 while (adding)
                 {
-                    c.Assignments.Add(CreateAssignment());
+                    CreateAssignmentWithGroup(c);
 
                     Console.WriteLine("Add more assignments? (Y/N)");
                     addAssignment = Console.ReadLine() ?? "N";
@@ -576,6 +582,49 @@ namespace CanvasClone1.Helpers
                 Totalavailablepoints = totalPoints,
                 Duedate = dueDate
             };
+        }
+
+        private void CreateAssignmentWithGroup(Course selectedCourse)
+        {
+            if (selectedCourse.AssignmentGroups.Any())
+            {
+                Console.WriteLine("[0] Add a new group");
+                selectedCourse.AssignmentGroups.ForEach(Console.WriteLine);
+
+                var selectionStr = Console.ReadLine() ?? string.Empty;
+                var selectionInt = int.Parse(selectionStr);
+
+                if (selectionInt == 0)
+                {
+                    var newGroup = new AssignmentGroup();
+                    Console.WriteLine("Group Name:");
+                    newGroup.Name = Console.ReadLine() ?? string.Empty;
+                    Console.WriteLine("Group Weight:");
+                    newGroup.Weight = decimal.Parse(Console.ReadLine() ?? "1");
+
+                    newGroup.Assignments.Add(CreateAssignment());
+                    selectedCourse.AssignmentGroups.Add(newGroup);
+                }
+                else if (selectionInt != 0) 
+                {
+                    var selectedGroup = selectedCourse.AssignmentGroups.FirstOrDefault(g => g.ID);
+                    if (selectedGroup != null)
+                    {
+                        selectedGroup.Assignments.Add(CreateAssignment());
+                    }
+                }
+            }
+            else
+            {
+                var newGroup = new AssignmentGroup();
+                Console.WriteLine("Name:");
+                newGroup.Name = Console.ReadLine() ?? string.Empty;
+                Console.WriteLine("Weight:");
+                newGroup.Weight = decimal.Parse(Console.ReadLine() ?? "1");
+
+                newGroup.Assignments.Add(CreateAssignment());
+                selectedCourse.AssignmentGroups.Add(newGroup);
+            }
         }
     }
 }
