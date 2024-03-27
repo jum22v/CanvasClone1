@@ -343,13 +343,18 @@ namespace CanvasClone1.Helpers
             if (selectedCourse != null)
             {
                 Console.WriteLine("Choose an assignment to delete: ");
-                selectedCourse.Assignments.ForEach(Console.WriteLine);
+                selectedCourse.Assignments.ToList().ForEach(Console.WriteLine);
                 var selectionStr = Console.ReadLine() ?? string.Empty;
                 var selectionInt = int.Parse(selectionStr);
-                var selectedAssignment = selectedCourse.Assignments.FirstOrDefault(a => a.ID == selectionInt);
-                if (selectedAssignment != null)
+
+                var selectedGroup = selectedCourse.AssignmentGroups.FirstOrDefault(a => a.ID == selectionInt);
+                if (selectedGroup != null)
                 {
-                    selectedCourse.Assignments.Remove(selectedAssignment);
+                    var selectedAssignment = selectedGroup.Assignments.FirstOrDefault(a => a.ID == selectionInt);
+                    if (selectedAssignment != null)
+                    {
+                        var index = selectedGroup.Assignments.Remove(selectedAssignment);
+                    }
                 }
             }
         }
@@ -515,7 +520,7 @@ namespace CanvasClone1.Helpers
             var description = Console.ReadLine() ?? string.Empty;
 
             Console.WriteLine("Which assignment should be added?");
-            c.Assignments.ForEach(Console.WriteLine);
+            c.Assignments.ToList().ForEach(Console.WriteLine);
             var choice = int.Parse(Console.ReadLine() ?? "-1");
             if(choice >= 0)
             {
@@ -607,7 +612,7 @@ namespace CanvasClone1.Helpers
                 }
                 else if (selectionInt != 0) 
                 {
-                    var selectedGroup = selectedCourse.AssignmentGroups.FirstOrDefault(g => g.ID);
+                    var selectedGroup = selectedCourse.AssignmentGroups.FirstOrDefault(g => g.ID == selectionInt);
                     if (selectedGroup != null)
                     {
                         selectedGroup.Assignments.Add(CreateAssignment());

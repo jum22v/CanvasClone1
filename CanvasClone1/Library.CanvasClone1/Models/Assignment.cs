@@ -24,7 +24,7 @@ namespace Library.CanvasClone1.Models
         }
         public override string ToString()
         {
-            return $"([{ID}] - {Duedate}) {Name}";
+            return $"{ID}. ({Duedate}) {Name}";
         }
 
     }

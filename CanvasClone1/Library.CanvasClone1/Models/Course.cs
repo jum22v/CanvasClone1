@@ -25,7 +25,7 @@ namespace Library.CanvasClone1.Models
         public string Description { get; set; }
         public List<Person> Roster { get; set; }
         public List<AssignmentGroup> AssignmentGroups { get; set; }
-        IEnumerable<Assignment> Assignments
+        public IEnumerable<Assignment> Assignments
         {
             get
             {
