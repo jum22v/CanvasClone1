@@ -721,5 +721,22 @@ namespace CanvasClone1.Helpers
                 selectedCourse.Submissions.FirstOrDefault(s => s.ID == selectedId).Content = Console.ReadLine() ?? string.Empty;
             }
         }
+
+        public void GradeSubmission()
+        {
+            Console.WriteLine("Enter the code of the course: ");
+            courseService.Courses.ForEach(Console.WriteLine);
+            var selection = Console.ReadLine();
+
+            var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+            if (selectedCourse != null)
+            {
+                selectedCourse.Submissions.ForEach(Console.WriteLine);
+                var selectedId = int.Parse(Console.ReadLine() ?? "0");
+
+                Console.WriteLine("Enter grade:");
+                selectedCourse.Submissions.FirstOrDefault(s => s.ID == selectedId).Grade = decimal.Parse(Console.ReadLine() ?? "0");
+            }
+        }
     }
 }
