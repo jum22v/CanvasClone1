@@ -202,16 +202,16 @@ namespace CanvasClone1.Helpers
             if (selectedCourse != null)
             {
                 Console.WriteLine("Enter the ID for the student");
-                selectedCourse.Roster.ForEach(Console.WriteLine);
+                selectedCourse.Roster.Where(r => r is Student).ToList().ForEach(Console.WriteLine);
                 var selectedStudentId = int.Parse(Console.ReadLine() ?? "0");
-                //var selectedStudent = selectedCourse.Roster.FirstOrDefault(s => s.ID == selectedStudentId);
+                var selectedStudent = selectedCourse.Roster.FirstOrDefault(s => s.ID == selectedStudentId);
 
                 Console.WriteLine("Enter the ID for the assignment");
                 selectedCourse.Assignments.ToList().ForEach(Console.WriteLine);
                 var selectedAssignmentId = int.Parse(Console.ReadLine() ?? "0");
-                //var selectedAssignment = selectedCourse.Assignments.FirstOrDefault(a => a.ID == selectedAssignmentId);
+                var selectedAssignment = selectedCourse.Assignments.FirstOrDefault(a => a.ID == selectedAssignmentId);
 
-                CreateSubmission(selectedCourse, selectedStudentId, selectedAssignmentId);
+                CreateSubmission(selectedCourse, selectedStudent as Student, selectedAssignment);
             }
         }
 
@@ -655,16 +655,34 @@ namespace CanvasClone1.Helpers
             }
         }
 
-        public void CreateSubmission(Course c, int studentID, int AssignmentID)
+        public void CreateSubmission(Course c, Student? student, Assignment? assignment)
         {
+            if (student == null || assignment == null)
+            {
+                return;
+            }
+
             Console.WriteLine("What is the content of the submission?");
             var content = Console.ReadLine();
             c.Submissions.Add(new Submission
             {
-                StudentID = studentID,
-                AssignmentID = AssignmentID,
-                Content = content
+                Student = student,
+                Assignment = assignment,
+                Content = content ?? string.Empty
             });
+        }
+
+        public void ListSubmissions()
+        {
+            Console.WriteLine("Enter the code of the course to add the assignment to: ");
+            courseService.Courses.ForEach(Console.WriteLine);
+            var selection = Console.ReadLine();
+
+            var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+            if (selectedCourse != null)
+            {
+                selectedCourse.Submissions.ForEach(Console.WriteLine);
+            }
         }
     }
 }

@@ -14,9 +14,9 @@ namespace Library.CanvasClone1.Models
             get; private set;
         }
 
-        public int StudentID { get; set; }
+        public Student Student { get; set; }
 
-        public int AssignmentID { get; set; }
+        public Assignment Assignment { get; set; }
 
         public string Content { get; set; }
 
@@ -24,6 +24,11 @@ namespace Library.CanvasClone1.Models
         {
             ID = ++lastId;
             Content = string.Empty;
+        }
+
+        public override string ToString()
+        {
+            return $"[{ID}] {Student.Name}: {Assignment}";
         }
     }
 }
