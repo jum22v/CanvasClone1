@@ -70,11 +70,12 @@ namespace MyApp
             Console.WriteLine("5. Add an assignment");
             Console.WriteLine("6. Update an assignment");
             Console.WriteLine("7. Remove an assignment");
-            Console.WriteLine("8. Add a module to a course");
-            Console.WriteLine("9. Update a module");
-            Console.WriteLine("10. Remove a module from a course");
-            Console.WriteLine("11. Update course information");
-            Console.WriteLine("12. Search for a course");
+            Console.WriteLine("8. Create a student submission");
+            Console.WriteLine("9. Add a module to a course");
+            Console.WriteLine("10. Update a module");
+            Console.WriteLine("11. Remove a module from a course");
+            Console.WriteLine("12. Update course information");
+            Console.WriteLine("13. Search for a course");
 
             var input = Console.ReadLine();
             if (int.TryParse(input, out int result))
@@ -109,21 +110,25 @@ namespace MyApp
                 }
                 else if (result == 8)
                 {
-                    courseHelper.AddModule();
+                    courseHelper.AddSubmission();
                 }
                 else if (result == 9)
                 {
-                    courseHelper.UpdateModule();
+                    courseHelper.AddModule();
                 }
                 else if (result == 10)
                 {
-                    courseHelper.RemoveModule();
+                    courseHelper.UpdateModule();
                 }
                 else if (result == 11)
                 {
-                    courseHelper.UpdateCourse();
+                    courseHelper.RemoveModule();
                 }
                 else if (result == 12)
+                {
+                    courseHelper.UpdateCourse();
+                }
+                else if (result == 13)
                 {
                     Console.WriteLine("Enter a query:");
                     var query = Console.ReadLine() ?? string.Empty;

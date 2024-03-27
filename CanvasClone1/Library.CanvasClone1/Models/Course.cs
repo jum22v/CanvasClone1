@@ -32,6 +32,7 @@ namespace Library.CanvasClone1.Models
                 return AssignmentGroups.SelectMany(ag => ag.Assignments);
             }
         }
+        public List<Submission> Submissions { get; set; }
         public List<Module> Modules { get; set; }
         public Course()
         {    
@@ -39,8 +40,9 @@ namespace Library.CanvasClone1.Models
             Description = string.Empty;
             Roster = new List<Person>();
             AssignmentGroups = new List<AssignmentGroup>();
+            Submissions = new List<Submission>();
             Modules = new List<Module>();
-
+            Prefix = string.Empty;
             ID = ++lastId;
         }
 
