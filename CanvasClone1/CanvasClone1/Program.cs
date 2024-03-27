@@ -72,11 +72,12 @@ namespace MyApp
             Console.WriteLine("7. Remove an assignment");
             Console.WriteLine("8. Create a student submission");
             Console.WriteLine("9. List all submissions for a course");
-            Console.WriteLine("10. Add a module to a course");
-            Console.WriteLine("11. Update a module");
-            Console.WriteLine("12. Remove a module from a course");
-            Console.WriteLine("13. Update course information");
-            Console.WriteLine("14. Search for a course");
+            Console.WriteLine("10. Delete a submission");
+            Console.WriteLine("11. Add a module to a course");
+            Console.WriteLine("12. Update a module");
+            Console.WriteLine("13. Remove a module from a course");
+            Console.WriteLine("14. Update course information");
+            Console.WriteLine("15. Search for a course");
 
             var input = Console.ReadLine();
             if (int.TryParse(input, out int result))
@@ -119,21 +120,25 @@ namespace MyApp
                 }
                 else if (result == 10)
                 {
-                    courseHelper.AddModule();
+                    courseHelper.RemoveSubmission();
                 }
                 else if (result == 11)
                 {
-                    courseHelper.UpdateModule();
+                    courseHelper.AddModule();
                 }
                 else if (result == 12)
                 {
-                    courseHelper.RemoveModule();
+                    courseHelper.UpdateModule();
                 }
                 else if (result == 13)
                 {
-                    courseHelper.UpdateCourse();
+                    courseHelper.RemoveModule();
                 }
                 else if (result == 14)
+                {
+                    courseHelper.UpdateCourse();
+                }
+                else if (result == 15)
                 {
                     Console.WriteLine("Enter a query:");
                     var query = Console.ReadLine() ?? string.Empty;
