@@ -192,6 +192,29 @@ namespace CanvasClone1.Helpers
             }
         }
 
+        public void AddSubmission()
+        {
+            Console.WriteLine("Enter the code of the course to add the assignment to: ");
+            courseService.Courses.ForEach(Console.WriteLine);
+            var selection = Console.ReadLine();
+
+            var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+            if (selectedCourse != null)
+            {
+                Console.WriteLine("Enter the ID for the student");
+                selectedCourse.Roster.ForEach(Console.WriteLine);
+                var selectedStudentId = int.Parse(Console.ReadLine() ?? "0");
+                //var selectedStudent = selectedCourse.Roster.FirstOrDefault(s => s.ID == selectedStudentId);
+
+                Console.WriteLine("Enter the ID for the assignment");
+                selectedCourse.Assignments.ToList().ForEach(Console.WriteLine);
+                var selectedAssignmentId = int.Parse(Console.ReadLine() ?? "0");
+                //var selectedAssignment = selectedCourse.Assignments.FirstOrDefault(a => a.ID == selectedAssignmentId);
+
+                CreateSubmission(selectedCourse, selectedStudentId, selectedAssignmentId);
+            }
+        }
+
         public void AddModule()
         {
             Console.WriteLine("Enter the code of the course to add the module to: ");
@@ -630,6 +653,18 @@ namespace CanvasClone1.Helpers
                 newGroup.Assignments.Add(CreateAssignment());
                 selectedCourse.AssignmentGroups.Add(newGroup);
             }
+        }
+
+        public void CreateSubmission(Course c, int studentID, int AssignmentID)
+        {
+            Console.WriteLine("What is the content of the submission?");
+            var content = Console.ReadLine();
+            c.Submissions.Add(new Submission
+            {
+                StudentID = studentID,
+                AssignmentID = AssignmentID,
+                Content = content
+            });
         }
     }
 }
