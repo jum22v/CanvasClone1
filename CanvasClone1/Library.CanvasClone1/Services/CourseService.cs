@@ -1,4 +1,5 @@
-﻿using Library.CanvasClone1.Models;
+﻿using Library.CanvasClone1.Database;
+using Library.CanvasClone1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,6 @@ namespace Library.CanvasClone1.Services
 {
     public class CourseService
     {
-        private List<Course> courseList;
         private static CourseService? _instance;
 
         public static CourseService Current
@@ -26,19 +26,19 @@ namespace Library.CanvasClone1.Services
 
         private CourseService()
         {
-            courseList = new List<Course>();
+            
         }
 
         public void Add(Course course)
         {
-            courseList.Add(course);
+            FakeDatabase.Courses.Add(course);
         }
 
         public List<Course> Courses
         {
             get
             {
-                return courseList;
+                return FakeDatabase.Courses;
             }
         }
 
