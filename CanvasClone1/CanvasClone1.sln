@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanvasClone1", "CanvasClone1\CanvasClone1.csproj", "{B9B8F21A-BDC2-4BA2-9FF0-9CFDC8E30508}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CanvasClone1", "CanvasClone1\CanvasClone1.csproj", "{B9B8F21A-BDC2-4BA2-9FF0-9CFDC8E30508}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.CanvasClone1", "Library.CanvasClone1\Library.CanvasClone1.csproj", "{0F1F9AE5-2797-4F1E-9770-4E7F6F8ECEA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.CanvasClone1", "Library.CanvasClone1\Library.CanvasClone1.csproj", "{0F1F9AE5-2797-4F1E-9770-4E7F6F8ECEA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAUI.CanvasClone", "MAUI.CanvasClone\MAUI.CanvasClone.csproj", "{6DBF15E6-03F3-4CEC-9592-CB53880A8E8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,12 @@ Global
 		{0F1F9AE5-2797-4F1E-9770-4E7F6F8ECEA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F1F9AE5-2797-4F1E-9770-4E7F6F8ECEA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F1F9AE5-2797-4F1E-9770-4E7F6F8ECEA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DBF15E6-03F3-4CEC-9592-CB53880A8E8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DBF15E6-03F3-4CEC-9592-CB53880A8E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DBF15E6-03F3-4CEC-9592-CB53880A8E8B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{6DBF15E6-03F3-4CEC-9592-CB53880A8E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DBF15E6-03F3-4CEC-9592-CB53880A8E8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DBF15E6-03F3-4CEC-9592-CB53880A8E8B}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
