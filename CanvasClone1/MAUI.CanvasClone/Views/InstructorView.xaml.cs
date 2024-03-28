@@ -10,6 +10,11 @@ public partial class InstructorView : ContentPage
 		BindingContext = new InstructorViewViewModel();
 	}
 
+	private void AddEnrollmentClick(object sender, EventArgs e)
+	{
+		Shell.Current.GoToAsync("//PersonDetail");
+	}
+
 	private void CancelClicked(object sender, EventArgs e)
 	{
 		Shell.Current.GoToAsync("//MainPage");
