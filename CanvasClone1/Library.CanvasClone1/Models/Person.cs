@@ -10,7 +10,6 @@
             get; private set;
         }
 
-        public List<Course>? Classes { set; get; }
         public Person()
         {
             Name = string.Empty;

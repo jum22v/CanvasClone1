@@ -26,6 +26,10 @@
             Clicked="AddEnrollmentClick"
             />
         <Button
+            Text="Update Enrollment"
+            Clicked="UpdateEnrollmentClick"
+            />
+        <Button
             Text="Remove Enrollment"
             Clicked="RemoveEnrollmentClick"
             />

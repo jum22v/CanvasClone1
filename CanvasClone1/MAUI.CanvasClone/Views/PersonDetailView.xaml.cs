@@ -4,12 +4,15 @@ using Library.CanvasClone1.Models;
 
 namespace MAUI.CanvasClone.Views;
 
+[QueryProperty(nameof(PersonId), "personId")]
 public partial class PersonDetailView : ContentPage
 {
 	public PersonDetailView()
 	{
         InitializeComponent();
 	}
+
+    public int PersonId { get; set; }
 
     private void OkClick(object sender, EventArgs e)
 	{
@@ -23,6 +26,6 @@ public partial class PersonDetailView : ContentPage
 
     private void OnArriving(object sender, NavigatedToEventArgs e)
     {
-        BindingContext = new PersonDetailViewModel();
+        BindingContext = new PersonDetailViewModel(PersonId);
     }
 }

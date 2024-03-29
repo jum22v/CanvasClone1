@@ -30,7 +30,8 @@ namespace MAUI.CanvasClone.ViewModels
 
         public void AddClick(Shell s)
         {
-            s.GoToAsync("//PersonDetail");
+            var idParam = SelectedPerson?.ID ?? 0;
+            s.GoToAsync($"//PersonDetail?personId={idParam}");
         }
 
         public void RemoveClick()

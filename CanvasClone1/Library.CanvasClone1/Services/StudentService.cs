@@ -37,6 +37,11 @@ namespace Library.CanvasClone1.Services
             }
         }
 
+        public Person? GetById(int id)
+        {
+            return FakeDatabase.People.FirstOrDefault(p => p.ID == id);
+        }
+
         public void Add(Person student)
         {
             FakeDatabase.People.Add(student);
