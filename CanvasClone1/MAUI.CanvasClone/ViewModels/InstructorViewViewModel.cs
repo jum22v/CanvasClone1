@@ -19,6 +19,7 @@ namespace MAUI.CanvasClone.ViewModels
                 return new ObservableCollection<Person>(StudentService.Current.Students);
             }
         }
+        public Person SelectedPerson { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -30,6 +31,14 @@ namespace MAUI.CanvasClone.ViewModels
         public void AddClick(Shell s)
         {
             s.GoToAsync("//PersonDetail");
+        }
+
+        public void RemoveClick()
+        {
+            if (SelectedPerson == null) { return; }
+
+            StudentService.Current.Remove(SelectedPerson);
+            RefreshView();
         }
 
         public void RefreshView()

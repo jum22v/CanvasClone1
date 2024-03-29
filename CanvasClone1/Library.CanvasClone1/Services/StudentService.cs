@@ -42,6 +42,10 @@ namespace Library.CanvasClone1.Services
             FakeDatabase.People.Add(student);
         }
 
+        public void Remove(Person student)
+        {
+            FakeDatabase.People.Remove(student);
+        }
 
         public IEnumerable<Person?> Search(string query)
         {
