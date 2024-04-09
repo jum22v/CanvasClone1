@@ -11,7 +11,7 @@ namespace Library.CanvasClone1.Models
         public string Code { 
             get 
             {
-                return $"{Prefix}{ID}";
+                return $"[{ID}] {Prefix}";
             } 
         }
 
@@ -34,7 +34,7 @@ namespace Library.CanvasClone1.Models
         }
         public List<Submission> Submissions { get; set; }
         public List<Module> Modules { get; set; }
-        public Course()
+        public Course(bool IDincrement = true)
         {    
             Name = string.Empty;
             Description = string.Empty;
@@ -43,7 +43,9 @@ namespace Library.CanvasClone1.Models
             Submissions = new List<Submission>();
             Modules = new List<Module>();
             Prefix = string.Empty;
-            ID = ++lastId;
+
+            if (IDincrement)
+                ID = ++lastId;
         }
 
         public override string ToString()

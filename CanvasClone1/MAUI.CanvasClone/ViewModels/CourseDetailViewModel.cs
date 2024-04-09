@@ -1,5 +1,6 @@
 ﻿using Library.CanvasClone1.Models;
 using Library.CanvasClone1.Services;
+using Microsoft.Maui.Layouts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace MAUI.CanvasClone.ViewModels
     {
         public CourseDetailViewModel()
         {
-            course = new Course();
+            course = new Course(false);
         }
 
         public string Name
@@ -41,7 +42,7 @@ namespace MAUI.CanvasClone.ViewModels
 
         public void AddCourse(Shell s)
         {
-            CourseService.Current.Add(course);
+            CourseService.Current.Add(new Course { Name = Name, Prefix = Prefix, Description = Description }) ;
             s.GoToAsync("//Instructor");
         }
     }
