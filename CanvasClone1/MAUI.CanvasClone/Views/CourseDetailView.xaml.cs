@@ -2,6 +2,7 @@ using MAUI.CanvasClone.ViewModels;
 
 namespace MAUI.CanvasClone.Views;
 
+[QueryProperty(nameof(CourseId), "courseId")]
 public partial class CourseDetailView : ContentPage
 {
 	public CourseDetailView()
@@ -10,6 +11,8 @@ public partial class CourseDetailView : ContentPage
         BindingContext = new CourseDetailViewModel();
     }
 
+    public int CourseId { get; set; }
+
     private void CancelClicked(object sender, EventArgs e)
     {
         Shell.Current.GoToAsync("//Instructor");
@@ -17,6 +20,6 @@ public partial class CourseDetailView : ContentPage
 
     private void OkClicked(object sender, EventArgs e)
     {
-        (BindingContext as CourseDetailViewModel).AddCourse(Shell.Current);
+        (BindingContext as CourseDetailViewModel).AddCourse();
     }
 }

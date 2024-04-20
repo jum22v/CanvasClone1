@@ -94,7 +94,16 @@ namespace MAUI.CanvasClone.ViewModels
 
         public void AddCourseClick(Shell s)
         {
-            s.GoToAsync($"//CourseDetail");
+            var idParam = SelectedCourse?.ID ?? 0;
+            s.GoToAsync($"//CourseDetail?courseId={idParam}");
+        }
+
+        public void RemoveCourseClick(Shell s)
+        {
+            if (SelectedCourse == null) { return; }
+
+            CourseService.Current.Remove(SelectedCourse);
+            RefreshView();
         }
 
         public void RemoveEnrollmentClick()

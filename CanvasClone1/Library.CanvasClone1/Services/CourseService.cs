@@ -28,10 +28,19 @@ namespace Library.CanvasClone1.Services
         {
             
         }
+        public Course? GetById(int id)
+        {
+            return FakeDatabase.Courses.FirstOrDefault(p => p.ID == id);
+        }
 
         public void Add(Course course)
         {
             FakeDatabase.Courses.Add(course);
+        }
+
+        public void Remove(Course course)
+        {
+            FakeDatabase.Courses.Remove(course);
         }
 
         public List<Course> Courses
